@@ -2,6 +2,7 @@
 **Game Documentation**  
 *By Jelle Van Lieshout & Rashida Dudhiawala*
 
+**Public Repository Link:** https://github.com/jellevlieshout/hogansalley
 ---
 
 ## Game Overview

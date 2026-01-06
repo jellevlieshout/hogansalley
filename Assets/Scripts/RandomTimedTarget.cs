@@ -31,6 +31,12 @@ public class RandomTimedTarget : MonoBehaviour
         cycleRoutine = StartCoroutine(VisibilityCycle());
     }
 
+    public void OnHit()
+    {
+        Debug.Log($"{name} was hit");
+        Destroy(gameObject);
+    }
+
     private void OnDisable()
     {
         if (cycleRoutine != null)

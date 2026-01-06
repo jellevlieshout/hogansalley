@@ -3429,6 +3429,56 @@
                     "isPartOfComposite": true
                 }
             ]
+        },
+        {
+            "name": "Gameplay",
+            "id": "cd56a1ac-b280-4dbe-b500-9f149ab969e5",
+            "actions": [
+                {
+                    "name": "Shoot",
+                    "type": "Button",
+                    "id": "66675cff-6c7f-493b-a558-1f919dc2a5db",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "41824807-ed54-42b6-b4a8-92cfd7461602",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ad05ffbe-6b60-47ff-a5a8-669db09bacee",
+                    "path": "<Keyboard>/space",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5fe508c1-6656-4ee9-82a8-0c6261b6569a",
+                    "path": "<XRController>{RightHand}/{PrimaryTrigger}",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

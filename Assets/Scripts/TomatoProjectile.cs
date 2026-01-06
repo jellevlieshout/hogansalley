@@ -1,16 +1,23 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Collider))]
 public class TomatoProjectile : MonoBehaviour
 {
-    public float lifeTime = 5f;
+    [SerializeField] private float lifeTime = 5f;
 
-    void Start()
+    private void Start()
     {
-        Destroy(gameObject, lifeTime);
+        Destroy(gameObject, lifeTime); // auto-cleanup
     }
 
-    void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision collision)
     {
-        Destroy(gameObject);  // Splats on hit
+        Debug.Log($"Projectile hit: {collision.collider.name}");
+        RandomTimedTarget target = collision.collider.GetComponent<RandomTimedTarget>();
+        if (target != null)
+            target.OnHit();
+
+        Destroy(gameObject);
     }
 }

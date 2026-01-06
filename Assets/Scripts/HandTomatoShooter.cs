@@ -1,36 +1,59 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class HandTomatoShooter : MonoBehaviour
+public class XRProjectileShooter : MonoBehaviour
 {
-    [Header("References")]
-    public InputActionProperty shootAction;
-    public Transform spawnPoint;
-    public GameObject tomatoPrefab;
-    public float shootForce = 15f;
+    [Header("Input")]
+    [SerializeField] private InputActionProperty shootAction;
+
+    [Header("Projectile")]
+    [SerializeField] private GameObject projectilePrefab;
+    [SerializeField] private Transform spawnPoint;
+    [SerializeField] private float shootForce = 15f;
 
     void OnEnable()
     {
+        shootAction.action.Enable();
         shootAction.action.performed += OnShoot;
     }
 
     void OnDisable()
     {
         shootAction.action.performed -= OnShoot;
+        shootAction.action.Disable();
     }
 
-    void OnShoot(InputAction.CallbackContext ctx)
+    private void OnShoot(InputAction.CallbackContext ctx)
     {
-        ShootTomato();
+        Fire();
     }
 
-    void ShootTomato()
+    private void Fire()
     {
-        if (tomatoPrefab == null || spawnPoint == null) return;
+        Debug.Log($"Prefab: {projectilePrefab}, SpawnPoint: {spawnPoint}");
 
-        GameObject tomato = Instantiate(tomatoPrefab, spawnPoint.position, spawnPoint.rotation);
-        Rigidbody rb = tomato.GetComponent<Rigidbody>();
-        if (rb != null)
-            rb.AddForce(spawnPoint.forward * shootForce, ForceMode.Impulse);
+        if (!projectilePrefab || !spawnPoint)
+        {
+            Debug.LogWarning("XRProjectileShooter: Missing prefab or spawn point");
+            return;
+        }
+
+        GameObject projectile = Instantiate(
+            projectilePrefab,
+            spawnPoint.position,
+            spawnPoint.rotation
+        );
+
+        Rigidbody rb = projectile.GetComponent<Rigidbody>();
+        if (!rb)
+        {
+            Debug.LogError("Projectile prefab must have a Rigidbody");
+            Destroy(projectile);
+            return;
+        }
+
+        rb.AddForce(spawnPoint.forward * shootForce, ForceMode.Impulse);
+
+        Debug.DrawRay(spawnPoint.position, spawnPoint.forward * 0.5f, Color.red, 1f);
     }
 }
